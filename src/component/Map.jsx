@@ -17,17 +17,17 @@ function Map() {
         <MapContainer 
           preferCanvas={true} 
           renderer={L.canvas()} 
-          minZoom={7} 
-          maxZoom={18} 
+          minZoom={MAP_SETTINGS.MINZOOM} 
+          maxZoom={MAP_SETTINGS.MAXZOOM} 
           maxBounds={BOUNDS} 
-          maxBoundsViscosity={0.8} 
-          center={{lat:45.592104,lng:2.844146}} 
-          zoom={10} 
+          maxBoundsViscosity={MAP_SETTINGS.VISCOSITY} 
+          center={MAP_SETTINGS.CENTER} 
+          zoom={MAP_SETTINGS.ZOOM} 
           scrollWheelZoom={true}
         >
           
           <TileLayer 
-            maxNativeZoom={MAP_SETTINGS.maxNativeZoom} 
+            maxNativeZoom={MAP_SETTINGS.MAXZOOM} 
             key={MAP_SETTINGS.URL} 
             url={MAP_SETTINGS.URL}
           />
@@ -35,13 +35,9 @@ function Map() {
             customLayer && 
             <TileLayer opacity={0.5} zIndex={100} key={customLayer._url} url={customLayer._url} maxNativeZoom={customLayer.options.maxNativeZoom}/>
           }       */}
-          {/* <Markers 
-            xplaura={xplaura}
-            selectIndex={selectIndex} 
-            setSelectIndex={setSelectIndex}
+          <Markers 
             setSelectInfo={setSelectInfo}
-            mobile={MOBILE}
-          /> */}
+          />
                   
             {/* <Gpx 
               selectInfo={selectInfo} 

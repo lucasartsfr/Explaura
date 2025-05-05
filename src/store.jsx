@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { databases } from './appwrite';
+import { databases, storage} from './appwrite';
 
 // Constantes pour votre base de données et collection
 const DATABASE_ID = 'votre_database_id';
@@ -10,12 +10,17 @@ export const useExplauraStore = create((set) => ({
     error: null,    
 
     SPOT: {}, // List all Spots
+    MEDIA : {},
     SELECTED_SPOT : null,
+    SELECTED_INDEX : null,
+    setSELECTED_INDEX: (index) => set({ SELECTED_INDEX: index }),
     SELECTED_INFO : null,
+    setSELECTED_INFO: (data) => set({ SELECTED_INFO: data }),
     GPX : null,
     PREV_GPX : null,
     MOVE : {lat : 0, lng :0},
-    FILTRES : "",
+    FILTRES : null,
+    RATE_EMOJI : ["😭","😞","😟","😐","🙂","😊","😃","😁","🤩","😍"],
     fetchSPOTs: async () => {
         set({ isLoading: true, error: null });
     
@@ -41,7 +46,20 @@ export const useExplauraStore = create((set) => ({
                 isLoading: false 
             });
         }
-    }
+    },
+    fetchFiles: async () => {
+        set({ isLoading: true, error: null });
+        try {
+          const response = await storage.listFiles('6817b7e90005e3cde7b1'); // Remplace par ton bucket ID
+          set({ MEDIA: response.files, isLoading: false });
+        } catch (error) {
+          console.error('Erreur lors du chargement des fichiers :', error);
+          set({ error: error.message, isLoading: false });
+        }
+    },
+    getFilePreview: (fileId) => {
+        return storage.getFileView('6817b7e90005e3cde7b1', fileId);
+    },
 
 
 }))
@@ -54,7 +72,11 @@ export const useMapStore = create((set) => ({
     USER_POSITION : {},
     MAP_SETTINGS : {
         URL : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        maxNativeZoom : 18,
+        MAXZOOM : 18,
+        MINZOOM : 7,
+        VISCOSITY : 0.8,
+        CENTER : {lat:45.592104,lng:2.844146},
+        ZOOM : 10
     },
     ICON_SETTINGS : {
         SIZE : [50, 50],

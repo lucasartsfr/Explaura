@@ -13,10 +13,11 @@ export const ExplauraContext = createContext(null);
 
 function App() {
 
-  const { SPOT, fetchSPOTs } = useExplauraStore();
+  const { SPOT, MEDIA, fetchSPOTs, fetchFiles } = useExplauraStore();
 
   useEffect(() => {
     fetchSPOTs();
+    fetchFiles();
 }, [fetchSPOTs]);
 
 
@@ -120,38 +121,38 @@ function App() {
   const Show = (selectInfo) ? "ShowInfo" : "HideInfo";
 
 
-  // useEffect(() => {
-  //   // Load Leaflet GPX
-  //   // var script = document.createElement('script')
-  //   // script.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/2.1.2/gpx.min.js" // Public URL is DOMAIN NAME
-  //   // document.body.appendChild(script);    
+  useEffect(() => {
+    // Load Leaflet GPX
+    // var script = document.createElement('script')
+    // script.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/2.1.2/gpx.min.js" // Public URL is DOMAIN NAME
+    // document.body.appendChild(script);    
 
-  //   // Get Data From Firebase
-  //   const fetchData = async () => {
-  //     const result = await getData('database', 'explaura');
-  //     setXplaura(result);
-  //   };
-  //   fetchData();
+    // Get Data From Firebase
+    const fetchData = async () => {
+      const result = await getData('database', 'explaura');
+      setXplaura(result);
+    };
+    fetchData();
 
-  //   // Get Weather
-  //   fetch('https://api.lucasarts.fr/weather/explaura').then(response => response.json()).then(data => setWeatherData(data))
-  //   .catch(error => console.error(error));
+    // Get Weather
+    fetch('https://api.lucasarts.fr/weather/explaura').then(response => response.json()).then(data => setWeatherData(data))
+    .catch(error => console.error(error));
 
-  //   // Detect Mobile
-  //   function isMobile(){ (window.innerWidth < 800) ? setMobile(true) : setMobile(false); };    
-  //   // Resize Path On Window Resize
-  //   window.addEventListener('resize', isMobile);
-  //   isMobile()
+    // Detect Mobile
+    function isMobile(){ (window.innerWidth < 800) ? setMobile(true) : setMobile(false); };    
+    // Resize Path On Window Resize
+    window.addEventListener('resize', isMobile);
+    isMobile()
 
-  //   return () => window.removeEventListener('resize', isMobile);
+    return () => window.removeEventListener('resize', isMobile);
     
-  // }, [getData])
+  }, [getData])
 
 
 
   // Check if user is on Mobile
   const isMobile = (mobile) ? "isMobile" : "NotMobile";
-
+console.log(MEDIA)
   return (
     <ExplauraContext.Provider value={{ 
       xplaura, Init, AllIcons, AllLayer, AllMap,
@@ -174,9 +175,9 @@ function App() {
         <Map />
         {/* <Card />       */}
       </div>
-      {/* <div id='InfoContainer' className={Show}>
+      <div id='InfoContainer' className={Show}>
         <Info />
-      </div>       */}
+      </div>      
     </div>
     </ExplauraContext.Provider>
   );

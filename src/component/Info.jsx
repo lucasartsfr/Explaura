@@ -15,11 +15,12 @@ import Gpx from './Gpx';
 import { ExplauraContext } from '../App';
 import Weather from './Weather';
 import Like from './Like';
+import { useExplauraStore, useMapStore } from '../store';
 
 function Info(){
-
-    const {selectInfo, customLayer, setSelectIndex, setGpxData, gpxData, AllIcons, prevGpx, setPrevGpx, setMove, move, Init, setSelectInfo, mapLayer} = useContext(ExplauraContext);
-    const RateEmoji = ["😭","😞","😟","😐","🙂","😊","😃","😁","🤩","😍"]; 
+    const {SELECTED_INFO, RATE_EMOJI, getFilePreview} = useExplauraStore()
+    const {MAP_SETTINGS} = useMapStore()
+    const {selectInfo, customLayer, setSelectIndex, setGpxData, gpxData, AllIcons, prevGpx, setPrevGpx, setMove, move, Init, setSelectInfo} = useContext(ExplauraContext);
     const [emblaRef] = useEmblaCarousel();
     useEmblaCarousel.globalOptions = { loop: true, speed: 100, dragFree: false }
 
@@ -44,28 +45,28 @@ function Info(){
     }
 
     // Generate Stat (x3) DIV
-    const InfoStat = (selectInfo) && Object.keys(selectInfo.Infos.Infos).map((stat, index)=>{
+    const InfoStat = (SELECTED_INFO) && SELECTED_INFO.INFOS.map((stat, index)=>{
         return(
             <div key={index} className='Info-stat'>
-                <h3>{stat}</h3>
-                <span>{selectInfo.Infos.Infos[stat]}</span>
+                <h3>{stat.split('-')[0]}</h3>
+                <span>{stat.split('-')[1]}</span>
             </div>
         )
     });
 
     // Slidehow V2
-    const EmblaSlideshow = (selectInfo) ? selectInfo.Infos.Photos.map((IdImage, index)=>{
+    const EmblaSlideshow = (SELECTED_INFO) ? SELECTED_INFO.PHOTOS.map((IdImage, index)=>{
         return(
             <div key={index} className='Slideshow-img embla__slide'>
-                <img alt={selectInfo.Name} src={`images/${selectInfo.Name}/${IdImage}`} />
+                <img alt={SELECTED_INFO.NAME} src={`images/${SELECTED_INFO.NAME}/${IdImage}`} />
             </div>
         )
     }) : <div className='Slideshow-img embla__slide' style={{backgroundImage : `url(${`Images/Explaura/1.jpg`})`}}> </div>;
 
 
     // Avis / Note
-    const Rating = (selectInfo) && RateEmoji.map((item, index) => {
-        const Focus = (selectInfo.Infos.Note === index) ? "FocusEmoji" : ""
+    const Rating = (SELECTED_INFO) && RATE_EMOJI.map((item, index) => {
+        const Focus = (SELECTED_INFO.RATE === index) ? "FocusEmoji" : ""
         return <span className={`Info-Emoji ${Focus}`} key={index}>{item}</span>
     })
 
@@ -103,7 +104,7 @@ function Info(){
         <div className="Info-scroller">
             <Like />
             <Weather />
-            <div className='Slideshow-container'  key={selectInfo} ref={emblaRef}>
+            <div className='Slideshow-container' key={SELECTED_INFO?.$id} ref={emblaRef}>
                     <div className={`Slideshow-element embla__container`}>
                         {EmblaSlideshow}
                     </div>
@@ -112,12 +113,12 @@ function Info(){
             <div className='Info-container'>
                 <div className='Info-Header'>                
                     <div className='Info-type'>
-                        <img alt={selectInfo?.Infos.Type} src={`image/theme/type/${selectInfo?.Infos.Type || Init.Type}.png`}></img>
+                        <img alt={SELECTED_INFO?.TYPE} src={getFilePreview("type-"+SELECTED_INFO?.TYPE)}></img>
                     </div>
 
                     <div className='Info-data'>
-                        <h1>{selectInfo?.Name || Init.Name}</h1>
-                        <p>{selectInfo?.Infos.Description || Init.Description}</p>
+                        <h1>{SELECTED_INFO?.NAME || Init.Name}</h1>
+                        <p>{SELECTED_INFO?.DESCRIPTION || Init.Description}</p>
                         <div className='Info-stats'>
                             {InfoStat}
                         </div>
@@ -126,7 +127,7 @@ function Info(){
                  {/* Map */}
                 <div className='Info-map' id='Info-map'>
                     <MapContainer center={{lat:45.592104,lng:2.844146}} zoom={13} scrollWheelZoom={true}>
-                        <TileLayer maxNativeZoom={mapLayer.Options.maxNativeZoom} key={mapLayer.Url} url={mapLayer.Url}/>
+                        <TileLayer maxNativeZoom={MAP_SETTINGS.MAXZOOM} key={MAP_SETTINGS.URL} url={MAP_SETTINGS.URL}/>
                         { 
                             customLayer && 
                             <TileLayer zIndex={100} opacity={0.5} key={customLayer._url} url={customLayer._url} maxNativeZoom={customLayer.options.maxNativeZoom}/>
@@ -167,20 +168,20 @@ function Info(){
                 </div>                    
 
                 {/* Note & Review  */}
-                {selectInfo && <div className='Info-note'>
+                {SELECTED_INFO && <div className='Info-note'>
                     <div className='Info-Review'>
                         <div className='Info-Review-User'>
                             <img alt="User" src={`image/theme/type/user.png`}/> 
                         </div>
                         <div className='Info-Review-Text'>
-                            {selectInfo?.Infos.Review || Init.Review}
+                            {SELECTED_INFO?.REVIEW || Init.Review}
                         </div>                        
                     </div>                    
                     <div className='Info-Smiley'>{Rating}</div>
                 </div> 
                 }    
-            { selectInfo && 
-                <a className='Info-DepartLink' rel="noreferrer" href={`https://www.google.com/maps/place/${selectInfo.Infos.Parking.lat}+${selectInfo.Infos.Parking.lng}`} target="_blank">Aller au point de départ</a>
+            { SELECTED_INFO && 
+                <a className='Info-DepartLink' rel="noreferrer" href={`https://www.google.com/maps/place/${SELECTED_INFO.PARKING[0]}+${SELECTED_INFO.PARKING[1]}`} target="_blank">Aller au point de départ</a>
             }
             </div>
          </div> 
