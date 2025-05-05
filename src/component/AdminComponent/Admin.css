@@ -1,0 +1,69 @@
+.Admin {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.FormDataContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.FormData > * {
+  text-align: center;
+}
+
+.FormData {
+  flex: 18% 0 0;
+  background: white;
+  border-radius: 12px;
+  color: black;
+  min-width: 220px;
+  margin: 0.5%;
+  overflow: hidden;  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 7px rgba(0, 0, 0, .2);
+}
+
+.FormData h4{
+  margin-bottom: 2px;
+}
+
+.FormData input, .FormData textarea{
+  background-color: rgb(238, 238, 238);
+  border-radius: 6px;
+  border: none;
+  /* border-bottom: 1px solid black; */
+  margin: 5px 0;
+  padding: 5px;
+  color: black;
+  max-width: 90%;
+  font-size: .8rem;
+  width: auto;
+}
+
+.FormData textarea{
+  width: 90%;
+  min-height: 80px;
+}
+
+.FormDataGroup{
+  margin: 10px 0;
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.FormDataGroup input{
+  text-align: center;
+  max-width: 40%;
+}
+
+
+.FormData button{
+  margin: 20px 0;
+}

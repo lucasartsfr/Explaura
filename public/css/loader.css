@@ -1,0 +1,43 @@
+.Loader{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999999;
+    position: fixed; 
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    animation: Loader 3.5s forwards;
+}
+
+.Center-Loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Logo-Loader{
+    max-width: 400px;
+}
+
+@keyframes Loader {
+    0% {
+      z-index: 99999999999;
+      opacity: 1;
+    }
+    
+  
+    90% {
+        opacity: 1;
+        z-index: 99999999999;
+    }
+
+
+    100%{
+        opacity: 0;
+        z-index: -99999999999;
+    }
+  }

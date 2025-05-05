@@ -1,0 +1,656 @@
+{
+    "Puy de dome" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.77246462548193,
+            "lng" : 2.9625362995532574
+        },        
+        "Parking" : {
+            "lat" :45.76422760935789, 
+            "lng" : 2.956646164618501
+        },        
+        "Description" : "Le Puy de Dome est le volcan emblématique de la chaîne des Puys. Haut de 1468 mètres, il est accessible à pied, mais aussi en train.",
+        "Infos" : {            
+            "Difficulté" : "Moyen",
+            "Virages" : "15",
+            "Fréquentation" : "Forte"
+        },    
+        "Note" : 6,
+        "Review" : "La randonnée n'est pas très difficile, mais c'est un lieu très (trop) fréquenté. La vue est belle et dégagée à 360°.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeDome"
+
+    },
+    "Puy de mur" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.76525148282973,
+            "lng" : 3.2501560449600224
+        },        
+        "Parking" : {
+            "lat" :45.75666823159202, 
+            "lng" : 3.2434073091270093
+        },        
+        "Description" : "Puy méconnu assez éloigné de la faille de la Limagne, il surplombe le village de Dallet. ",
+        "Infos" : {
+            "Difficulté" : "Moyen",
+            "Environnement" : "Fôret",
+            "Vue" : "Panoramique"
+        },    
+        "Note" : 5,
+        "Review" : "La randonnée est essentiellement en forêt, avec une dénivlé assez important tout du long. Au sommet, la vue panoramique est très belle.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeMur"
+
+    },
+    "Puy de la tache" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.592104405180926,
+ 	 	 	"lng" : 2.8449547290802
+        },        
+        "Parking" : {
+            "lat" : 45.59707805443856, 
+            "lng" : 2.8505562710154
+        },        
+        "Description" : "Puy éloigné de la chaîne des Puys, il est accessbile via le col de la croix morand.",
+        "Infos" : {
+            "Difficulté" : "Moyen",
+            "Chiens" : "En laisse",
+            "Vue" : "360°"
+        },    
+        "Note" : 7,
+        "Review" : "Le puy de la tache offre une vue imprenable sur le massif du Sancy ainsi que sur la chaîne des Puys. La randonnée est courte et accessible à tous.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "10.jpg"
+        ],
+        "Gpx" : "PuyDeLaTache"
+
+    },
+    "Puy de monne" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.58236616495395,
+ 	 	 	"lng" : 2.845448255538941
+        },        
+        "Parking" : {
+            "lat" : 45.59707805443856, 
+            "lng" : 2.8505562710154
+        },        
+        "Description" : "Puy situé juste après le Puy de la tache en direction du Puy de l'Angle.",
+        "Infos" : {
+            "Danger" : "Hiver",
+            "Vue" : "360°",
+            "Fréquentation" : "Faible"
+        },    
+        "Note" : 5,
+        "Review" : "Situé juste après le Puy de la tache, le Puy de monne offre une belle vue sur le lac du guery et le massif du sancy. Attention toutefois en hiver à ne pas glisser.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeMonne"
+
+    },
+    "Puy de barbier" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.578018324921764,
+ 	 	 	"lng" : 2.8396010398864746
+        },        
+        "Parking" : {
+            "lat" : 45.59707805443856, 
+            "lng" : 2.8505562710154
+        },        
+        "Description" : "Puy étape entre le Puy de la tache et le Puy de l'angle, il offre une vue imprenable à 360°",
+        "Infos" : {
+            "Difficulté" : "Facile",
+            "Vue" : "360°",
+            "Danger" : "Hiver"
+        },    
+        "Note" : 6,
+        "Review" : "Entre le Puy de la tache et le Puy de l'angle, ce puy est une étape offrant une belle vue sur le col de la croix Morand ainsi que sur le lac du guery.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeBarbier"
+
+    },
+    "Puy de l'angle" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.57293039896812,
+ 	 	 	"lng" : 2.8398907184600835
+        },        
+        "Parking" : {
+            "lat" : 45.59707805443856, 
+            "lng" : 2.8505562710154
+        },        
+        "Description" : "Puy très imposant à proximité du col de la croix de Saint-robert, il offre une vue magnifique sur le massif du Sancy. ",
+        "Infos" : {
+            "Difficulté" : "Difficile",
+            "Vue" : "360°",
+            "Fréquentation" : "Moyenne"
+        },    
+        "Note" : 7,
+        "Review" : "Dernier Puy de l'itinéraire Puy de la tache - Puy de l'angle, ce dernier offre une superbe vue à 360°. Si l'assencion peut s'avérer longue, elle en vaut la peine.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeAngle"
+
+    },
+    "Puy de combegrasse" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.66809016981451,
+            "lng" : 2.9482734203338627
+        },        
+        "Parking" : {
+            "lat" :45.66860749205102, 
+            "lng" : 2.938327789306641
+        },        
+        "Description" : "Puy situé à proximité du Lac d'Aydat, il offre une vue imprenable sur la chaine des Puys.",
+        "Infos" : {            
+            "Difficulté" : "Facile",
+            "Chiens" : "Sept-Mars",
+            "Fréquentation" : "Forte"
+        },    
+        "Note" : 7,
+        "Review" : "Puy facile d'accès qui offre un point de vue unique et inhabituel sur la chaîne des Puys.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "PuyDeCombegrasse"
+
+    },
+    "Puy de Sancy" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.52824217288873,
+            "lng" : 2.8139130721389365
+        },        
+        "Parking" : {
+            "lat" : 0, 
+            "lng" : 0
+        },        
+        "Description" : "Plus haut massif de la chaîne des Puys, il culmine à 1886 mètres ! Il accueil le station de ski de SuperBesse et du Mont D'or.",
+        "Infos" : {            
+            "Difficulté" : "Difficile",
+            "Vue" : "360°",
+            "Fréquentation" : "Élevée"
+        },    
+        "Note" : 9,
+        "Review" : "Plus beau panorama de la chaîne des Puys ! Il est possibile d'observer le Puy Mary dans le Cantal, mais aussi les Alpes depuis son sommet.",
+        "Photos" : [
+            "1.jpg",
+            "4.jpg",
+            "5.jpg",
+            "7.jpg",
+            "9.jpg",
+            "10.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Puy de vichatel" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.687450865764006,
+            "lng" : 2.962094116427175
+        },        
+        "Parking" : {
+            "lat" : 45.6830530962765,
+ 	 	 	"lng" : 2.961587905883789
+        },        
+        "Description" : "Petit Puy situé à Proximité d'Aydat et excentré de la chaîne des Puys.",
+        "Infos" : {            
+            "Fréquentation" : "Faible",
+            "Vue" : "180°",
+            "Difficultée" : "Facile"
+        },    
+        "Note" : 7,
+        "Review" : "Le Puy de Vichatel est facile d'accès, facile à grimper et il offre une très bell vue sur le Massif du Sancy.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Puy des goules" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.80895995876193,
+            "lng" : 2.97888848196321
+        },        
+        "Parking" : {
+            "lat" : 45.80422801358782,
+ 	 	 	"lng" : 2.986988425254822
+        },        
+        "Description" : "Le Puy des Goules est facile d'accès et très touristique.",
+        "Infos" : {            
+            "Fréquentation" : "Élevée",
+            "Paysage" : "Forêt",
+            "Difficultée" : "Facile"
+        },    
+        "Note" : 6,
+        "Review" : "Facile d'accès, il est également très connu, ce qui le rend très fréquenté par beau temps. Il offre toutefois une belle vue sur Clermont-Ferrand.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Puy saint romain" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.67990839559914,
+            "lng" : 3.2429245255988866
+        },        
+        "Parking" : {
+            "lat" : 0, 
+            "lng" : 0
+        },        
+        "Description" : "Puy éloigné de la faille de la Limagne, il domine le village se Saint Maurise.",
+        "Infos" : {            
+            "Vue" : "360°",
+            "Paysage" : "Champs",
+            "Difficultée" : "Difficile"
+        },    
+        "Note" : 7,
+        "Review" : "Particulièrement difficile à grimper de par son dénivelé et son manque d'ombre, il offre toutefois une vue imprenable sur la chaine des Puys et le Massif du Sancy. ",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    },     
+    "Casacde de pérouse" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.536364659125674,
+            "lng" : 2.8528197197845655
+        },        
+        "Parking" : {
+            "lat" : 45.54078884162472,
+ 	 	 	"lng" : 2.8624427318573002
+        },        
+        "Description" : "Grande cascade au coeur de la vallée de Chaudefour",
+        "Infos" : {            
+            "Débit" : "Moyen",
+            "Taille" : "Grande",
+            "Accessibilité" : "Facile"
+        },    
+        "Note" : 6,
+        "Review" : "Cascade facile d'accès au coeur de la vallée de Chaudefour avec un bon débit en toute circonstance !",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade de Baumicou" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 44.515199017089785,
+            "lng" : 4.221000976073805
+        },        
+        "Parking" : {
+            "lat" : 44.50717236651918,
+ 	 	 	"lng" : 4.221255183219911
+        },        
+        "Description" : "Cascade au coeur de le forêt sur l'itinéraire des tétines de Vernon.",
+        "Infos" : {            
+            "Accessibilité" : "Facile",
+            "Débit" : "Faible",
+            "Taille" : "Moyenne"
+        },    
+        "Note" : 5,
+        "Review" : "Grande cascade avec un petit débit, elle est fréquement assechées lors de fortes chaleur. La petite grotte derrière créé une ambiance unique.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade de la beaume" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 44.942797546393614,
+            "lng" : 3.8909883875115883
+        },        
+        "Parking" : {
+            "lat" : 44.9422327675982,
+ 	 	 	"lng" : 3.8816499710083012
+        },        
+        "Description" : "Magnifique cascade au coeur de la forêt.",
+        "Infos" : {            
+            "Débit" : "Fort",
+            "Taille" : "Grande",
+            "Accessibilité" : "Moyenne"
+        },    
+        "Note" : 8,
+        "Review" : "Grande et magnifique cascade accessible en 20 minutes depuis le parking ! La balade se fait en Forêt et débouche sur un point de vue de la cascade. ",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade des veyrines" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.25178980545671,
+            "lng" : 2.894489380069929
+        },        
+        "Parking" : {
+            "lat" : 45.252851411449875,
+ 	 	 	"lng" : 2.8949511051177983
+        },        
+        "Description" : "Petite cascade au milieu des prés et facilement accessible. ",
+        "Infos" : {            
+            "Débit" : "Moyen",
+            "Taille" : "Moyenne",
+            "Accessibilité" : "Facile"
+        },    
+        "Note" : 5,
+        "Review" : "La cascade des veyrines est facilement accessible depuis la route, il faut moins de 5 minutes pour y accéder",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade du mont d'or" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.566117648597114,
+            "lng" :  2.8201779487202687
+        },        
+        "Parking" : {
+            "lat" : 45.56906627122278,
+ 	 	 	"lng" : 2.81500518321991
+        },        
+        "Description" : "La grande et emblématique cascade du Mont-dore",
+        "Infos" : {            
+            "Taille" : "Grande",
+            "Débit" : "Moyen",
+            "Accessibilité" : "Difficile"
+        },    
+        "Note" : 7,
+        "Review" : "Belle et grande cascade au milieu de la fôret ! Accessible depuis le bas (Mont-Dore) et le haut (Col de Saint robert) l'accès peut s'avérer difficile en hiver lorsque le sol est gelé.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg",
+            "4.jpg",
+            "6.jpg",
+            "7.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade du vaucoux" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.49139384169627,
+            "lng" : 2.93776038190669
+        },        
+        "Parking" : {
+            "lat" : 45.49398791506419,
+            "lng" : 2.941460249717234
+        },        
+        "Description" : "Cascade cachée au coeur de la fôret le long des routes d'Auvergne",
+        "Infos" : {            
+            "Débit" : "Fort",
+            "Taille" : "Petite",
+            "Accessibilité" : "Facile"
+        },    
+        "Note" : 6,
+        "Review" : "Très belle petite cascade, l'accès est facile et aménagé pour le tourisme. Le Parking n'en est pas un, il faut donc se garer au bort de la route.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascades de chiloza" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.52103949085814,
+            "lng" : 2.947439449815304
+        },        
+        "Parking" : {
+            "lat" : 45.521207693246915,
+            "lng" : 2.9447338952608213
+        },        
+        "Description" : "Les cascades de Chiloza sont de petites et moyennes cascades situées à proxomité de Besse, au coeur de la forêt.",
+        "Infos" : {            
+            "Taille" : "Variable",
+            "Débit" : "Moyen",
+            "Accessibilité" : "Moyenne"
+        },    
+        "Note" : 1,
+        "Review" : "Belle randonnée au coeur de la forêt avec de petites et moyennes cascades le long du trajet ! L'accessibilié est Moyenne car certains passages ne sont pas aménagés.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascades des saliens" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.72482772807841,
+            "lng" : 2.8945924677968695
+        },        
+        "Parking" : {
+            "lat" : 45.725704697289785,
+ 	 	 	"lng" : 2.895348072052002
+        },        
+        "Description" : "Grande cascade cachée au coeur de la fôret de Nébouzat",
+        "Infos" : {            
+            "Taille" : "Grande",
+            "Débit" : "Moyen",
+            "Accessibilité" : "Difficile"
+        },    
+        "Note" : 8,
+        "Review" : "Cascade difficilement accessible car non aménagée, elle reste cependant l'une d'est plus belle cascade de la région, tant par son ambiance sauvage que sa forme.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Cascade les 3 cuves" : {
+        "Type" : "cascade",
+        "Coord" : {
+            "lat" : 45.99372609284305,
+            "lng" : 2.8279603609046235
+        },        
+        "Parking" : {
+            "lat" : 45.986875331109964,
+ 	 	 	"lng" : 2.826429775768481
+        },        
+        "Description" : "Petite cascade cachée au coêur de la fôret vers les Ancizes",
+        "Infos" : {            
+            "Taille" : "Moyenne",
+            "Débit" : "Moyen",
+            "Accessibilité" : "Facile"
+        },    
+        "Note" : 6,
+        "Review" : "Cascade facilement accessible et très peu fréquentée avec une randonnée relativement plate le long de la Sioule.",
+        "Photos" : [
+        ],
+        "Gpx" : "CascadeLes3Cuves"
+
+    },
+    "Lac chambon" : {
+        "Type" : "lac",
+        "Coord" : {
+            "lat" : 45.57012872908472,
+            "lng" : 2.922490977159395
+        },        
+        "Parking" : {
+            "lat" : 45.57359880225784,
+ 	 	 	"lng" : 2.922513484954834
+        },        
+        "Description" : "Lac d'origine volcanique situé dans les Monts-D'or, au coeur du village de Chambon sur Lac.",
+        "Infos" : {            
+            "Taille" : "Grand",
+            "Fréquentation" : "Très forte",
+            "Baignade" : "Autorisée"
+        },    
+        "Note" : 7,
+        "Review" : "Très beau lac avec une très belle vue sur le massif du Sancy. Le tour est facile et agréable avec des pontons sur l'eau rendant la traversée très sympathique.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Lac Pavin" : {
+        "Type" : "lac",
+        "Coord" : {
+            "lat" : 45.495891962777165,
+            "lng" : 2.887919477748581
+        },        
+        "Parking" : {
+            "lat" : 45.50054186210741,
+ 	 	 	"lng" : 2.887178063392639
+        },        
+        "Description" : "Plus jeune volcan de France, il s'est formé il y à 7000 ans seulement !",
+        "Infos" : {            
+            "Taille" : "Moyen",
+            "Fréquentation" : "Très forte",
+            "Baignade" : "Interdite"
+        },    
+        "Note" : 8,
+        "Review" : "Magnifique Lac dont il est possible de faire le tour très facilement. Un point de vue en haut permet de l'admirer dans l'axe du Puy de de Sancy.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "5.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Lac de Mirefleurs" : {
+        "Type" : "lac",
+        "Coord" : {
+            "lat" : 45.70336208889128,
+ 	 	 	"lng" : 3.2144987583160405
+        },        
+        "Parking" : {
+            "lat" : 45.70008017572559,
+ 	 	 	"lng" : 3.2118487358093266
+        },        
+        "Description" : "Petit lac à proximité de Mirefleurs dont il est facile de faire le tour.",
+        "Infos" : {            
+            "Taille" : "Moyen",
+            "Fréquentation" : "Moyenne",
+            "Baignade" : "Interdite"
+        },    
+        "Note" : 5,
+        "Review" : "Petit lac très sympa à proxmité de Mirefleurs et de l'allier. Passaga de Cycliste et de chevaux régulièrement.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : "LacDeMirefleurs"
+
+    },
+    "Lac de Servière" : {
+        "Type" : "lac",
+        "Coord" : {
+            "lat" : 45.64593829625519,
+            "lng" : 2.8592133522033696
+        },        
+        "Parking" : {
+            "lat" :45.64767836780432, 
+            "lng" : 2.8534412384033208
+        },        
+        "Description" : "Lac d'origine volcanique à proxmité du mont d'or, le long du col du Guery.",
+        "Infos" : {
+            "Taille" : "Moyen",
+            "Baignade" : "Interdite",
+            "Fréquentation" : "Moyenne"
+        },    
+        "Note" : 7,
+        "Review" : "Très beau lac dont il est facile de faire le tour ! Idéal pour se poser tranquillement en journée ou le soir pour observer les étoiles.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Mont Gerbier de jonc" : {
+        "Type" : "montagne",
+        "Coord" : {
+            "lat" : 44.8438733979778,
+            "lng" : 4.220106964003976
+        },        
+        "Parking" : {
+            "lat" : 44.84161054621535,
+ 	 	 	"lng" : 4.220380783081056
+        },        
+        "Description" : "Source de la Loire, il culmine à 1551 mètres au coeur de l'ardèche.",
+        "Infos" : {            
+            "Fréquentation" : "Moyenne",
+            "Vue" : "360°",
+            "Difficulté" : "Difficile"
+        },    
+        "Note" : 7,
+        "Review" : "Le mont Gerbier de Jonc est impressionnant tant par sa forme que par sa nature ! Il s'agit de la source de la Loire qui traverse le Pays. La monté est très hard car très courte.",
+        "Photos" : [
+            "1.jpg",
+            "2.jpg"
+        ],
+        "Gpx" : ""
+
+    },
+    "Banne d'ordanche" : {
+        "Type" : "volcan",
+        "Coord" : {
+            "lat" : 45.61121932756876,
+ 	 	 	"lng" : 2.7725940942764287
+        },        
+        "Parking" : {
+            "lat" : 45.60250901510299,
+ 	 	 	"lng" : 2.7507233619689946
+        },        
+        "Description" : "Sommet volcanique culminant à plus de 1550 mètres",
+        "Infos" : {            
+            "Difficulté" : "Moyenne",
+            "Vue" : "360°",
+            "Fréquentation" : "Moyenne"
+        },    
+        "Note" : 6,
+        "Review" : "Très beau sommet éloigné du Massif du Sancy offrant donc une vue imprenable sur toute la vallée.",
+        "Photos" : [
+            "1.jpg"
+        ],
+        "Gpx" : ""
+
+    }   
+}
