@@ -3,14 +3,13 @@ import {Popup, Marker, useMap} from 'react-leaflet';
 import * as L from "leaflet";
 import { useExplauraStore, useMapStore } from '../store';
 
-function Markers(props) {
+function Markers() {
 
   const {FILTRES, SPOT, setSELECTED_INDEX, SELECTED_INDEX,setSELECTED_INFO} = useExplauraStore();
   const {ICON_SETTINGS, MOBILE} = useMapStore()
 
   const markerRef = useRef([]); // Create A Ref for Marker
   const map = useMap();
-  const { setSelectInfo } = props;
   
   // Icon Settings (Default Parameters)
   const IconSettings = {
@@ -50,7 +49,6 @@ function Markers(props) {
   const ClickButton = (e) => {
     const SelectedInfos = SPOT[Object.keys(SPOT)[SELECTED_INDEX]];
     setSELECTED_INFO(SelectedInfos)
-    console.log(SelectedInfos)
     setTimeout(()=>{ document.getElementById('InfoContainer').scrollIntoView(); }, 10) // Delay First click on A not Working
   }
 

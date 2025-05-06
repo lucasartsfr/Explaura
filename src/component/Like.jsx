@@ -1,35 +1,33 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {AiFillHeart as Heart} from 'react-icons/ai';
-import { ExplauraContext } from '../App';
-import { FirebaseContext } from './FirebaseContext';
+import { useExplauraStore } from '../store';
 
 export default function Like(){
 
-    const { selectInfo } = useContext(ExplauraContext);
-    const { UpdateLike } = useContext(FirebaseContext);
+    const {SELECTED_INFO} = useExplauraStore()
 
     const [like, setLike] = useState(0); // Default Like is 0 OR Item Like
     const AlreadyLike = useRef([]);
 
     useEffect(() =>{
-        setLike(selectInfo?.Infos?.Like || 0); // On Change Select set New Like Value 
-    }, [selectInfo])
+        setLike(SELECTED_INFO?.LIKE|| 0); // On Change Select set New Like Value 
+    }, [SELECTED_INFO])
 
     // Update Like
     const handleLike = (e) =>{
-        if(AlreadyLike.current.includes(selectInfo?.Name)){
+        if(AlreadyLike.current.includes(SELECTED_INFO?.NAME)){
             console.log('Already Like !')
         }
         else{
-            UpdateLike('database','explaura', selectInfo?.Name); // Push Like to DataBase
+            UpdateLike('database','explaura', SELECTED_INFO?.NAME); // Push Like to DataBase
             setLike(like+1); // Increment New Like for Display        
-            selectInfo && (selectInfo['Infos']['Like'] = (like+1)); // Store New Like Localy (Prevent new fetch from database)
+            SELECTED_INFO && (SELECTED_INFO['Infos']['Like'] = (like+1)); // Store New Like Localy (Prevent new fetch from database)
             AlreadyLike.current.push(selectInfo?.Name)
         }
         
     }
 
-    if(!selectInfo){
+    if(!SELECTED_INFO){
         return <></>
     }
 

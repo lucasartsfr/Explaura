@@ -12,22 +12,23 @@ import {TbChartLine as Elevation} from "react-icons/tb";
 import useEmblaCarousel from 'embla-carousel-react';
 
 import Gpx from './Gpx';
-import { ExplauraContext } from '../App';
 import Weather from './Weather';
 import Like from './Like';
-import { useExplauraStore, useMapStore } from '../store';
+import { useExplauraStore, useGpxStore, useMapStore } from '../store';
 
 function Info(){
-    const {SELECTED_INFO, RATE_EMOJI, getFilePreview} = useExplauraStore()
-    const {MAP_SETTINGS} = useMapStore()
-    const {selectInfo, customLayer, setSelectIndex, setGpxData, gpxData, AllIcons, prevGpx, setPrevGpx, setMove, move, Init, setSelectInfo} = useContext(ExplauraContext);
+
+    const {SELECTED_INFO, SELECTED_INFO_DEFAULT, RATE_EMOJI, getFilePreview} = useExplauraStore()
+    const {MAP_SETTINGS, CUSTOM_LAYER} = useMapStore()
+    const {GPX_DATA, setMOVE} = useGpxStore();
+
     const [emblaRef] = useEmblaCarousel();
     useEmblaCarousel.globalOptions = { loop: true, speed: 100, dragFree: false }
 
     // Check if GPX is Selected and Generate Array [Altitude, Distance]
-    const Data = (gpxData) && gpxData.ElevationArray.map((item, index) => {
+    const Data = (GPX_DATA) && GPX_DATA?.ElevationArray?.map((item, index) => {
         const Data = {
-                Distance : parseFloat(gpxData.ElevationLabel[index]),
+                Distance : parseFloat(GPX_DATA.ElevationLabel[index]),
                 Altitude : parseInt(item)
             }        
         return Data
@@ -39,7 +40,7 @@ function Info(){
     const HoverChart = (e) =>{
         clearTimeout(NoSpam);
         NoSpam = setTimeout(()=>{
-            (e.activeTooltipIndex) && setMove(gpxData.GpxData.LatLngSvg[e.activeTooltipIndex]);
+            (e.activeTooltipIndex) && setMOVE(GPX_DATA?.GpxData?.LatLngSvg[e.activeTooltipIndex]);
         },10);
         
     }
@@ -82,15 +83,15 @@ function Info(){
         }
     }
 
-    
+
     // Gpx data Binding
-    const BindGpxData = (gpxData) && ['Heart','Distance','TotalTime','MinutePerKm','GainElevation','MovingSpeedUpdated'].map((item, index)=>{
+    const BindGpxData = (GPX_DATA) && ['Heart','Distance','TotalTime','MinutePerKm','GainElevation','MovingSpeedUpdated'].map((item, index)=>{
         const Assoc = ['BPM','KM','DURÉE','MIN/KM','METRES','KM/H']
         const Icons = [<Heart className='fa-beat'/>,<Hiking className='fa-bounce'/>, <Clock className='fa-spin'/>,<Rythme className='fa-beat'/>, <Elevation className='fa-bounce'/>, <Speed className='fa-shake'/>]
         return(
             <div key={index} className='data-gpx'>
                 <span className='Icons'>{Icons[index]}</span>
-                <h4>{gpxData.GpxData[item]}</h4>
+                <h4>{GPX_DATA?.GpxData[item]}</h4>
                 <span className='name'>{Assoc[index]}</span>
             </div>
         )
@@ -117,8 +118,8 @@ function Info(){
                     </div>
 
                     <div className='Info-data'>
-                        <h1>{SELECTED_INFO?.NAME || Init.Name}</h1>
-                        <p>{SELECTED_INFO?.DESCRIPTION || Init.Description}</p>
+                        <h1>{SELECTED_INFO?.NAME || SELECTED_INFO_DEFAULT.NAME}</h1>
+                        <p>{SELECTED_INFO?.DESCRIPTION || SELECTED_INFO_DEFAULT.DESCRIPTION}</p>
                         <div className='Info-stats'>
                             {InfoStat}
                         </div>
@@ -129,18 +130,10 @@ function Info(){
                     <MapContainer center={{lat:45.592104,lng:2.844146}} zoom={13} scrollWheelZoom={true}>
                         <TileLayer maxNativeZoom={MAP_SETTINGS.MAXZOOM} key={MAP_SETTINGS.URL} url={MAP_SETTINGS.URL}/>
                         { 
-                            customLayer && 
-                            <TileLayer zIndex={100} opacity={0.5} key={customLayer._url} url={customLayer._url} maxNativeZoom={customLayer.options.maxNativeZoom}/>
+                            CUSTOM_LAYER && 
+                            <TileLayer zIndex={100} opacity={0.5} key={CUSTOM_LAYER._url} url={CUSTOM_LAYER._url} maxNativeZoom={CUSTOM_LAYER.options.maxNativeZoom}/>
                         }      
                             <Gpx 
-                                selectInfo={selectInfo} 
-                                setGpxData={setGpxData}
-                                setPrevGpx={setPrevGpx}
-                                prevGpx={prevGpx}
-                                AllIcons={AllIcons}
-                                move={move}
-                                setSelectInfo={setSelectInfo}
-                                setSelectIndex={setSelectIndex}
                             />                                        
                     </MapContainer>
 
@@ -174,7 +167,7 @@ function Info(){
                             <img alt="User" src={`image/theme/type/user.png`}/> 
                         </div>
                         <div className='Info-Review-Text'>
-                            {SELECTED_INFO?.REVIEW || Init.Review}
+                            {SELECTED_INFO?.REVIEW}
                         </div>                        
                     </div>                    
                     <div className='Info-Smiley'>{Rating}</div>

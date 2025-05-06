@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
-import { ExplauraContext } from '../App';
+import React from 'react';
+import { useExplauraStore } from '../store';
 
 export default function Weather(){
 
-    const {selectInfo, weatherData} = useContext(ExplauraContext);
-
+    const {SELECTED_INFO, WEATHER} = useExplauraStore()
      // Weather Data
-     const SmallWeatherData = (selectInfo && weatherData) && weatherData.map((item) => {
+     const SmallWeatherData = (SELECTED_INFO && WEATHER) && WEATHER.map((item) => {
         const WeatherLat = parseFloat(item.Coord.Lat);
         const WeatherLng = parseFloat(item.Coord.Lng);
-        const SelectInfoLat = parseFloat(selectInfo.Infos.Coord.lat.toFixed(1));
-        const SelectInfoLng = parseFloat(selectInfo.Infos.Coord.lng.toFixed(1));
+        const SelectInfoLat = parseFloat(SELECTED_INFO.COORD[0].toFixed(1));
+        const SelectInfoLng = parseFloat(SELECTED_INFO.COORD[1].toFixed(1));
         
         const ToReturn = (WeatherLat === SelectInfoLat && SelectInfoLng === WeatherLng ) && 
             (<div className='Info-weather-small' key="Item">

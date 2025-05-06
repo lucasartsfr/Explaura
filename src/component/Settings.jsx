@@ -1,16 +1,18 @@
-import React, {useState, useContext}  from 'react';
+import React, {useState}  from 'react';
 import {BsFillGearFill as Gear} from "react-icons/bs";
-
 import {GiDeliveryDrone as Drone} from "react-icons/gi";
 import {GiStreetLight as Light} from "react-icons/gi";
 import {GrFormClose as Close} from "react-icons/gr";
-import { ExplauraContext } from '../App';
+import { useExplauraStore, useMapStore } from '../store';
 
 
 function Settings(props){
 
+    const {SPOT, FILTRES, setFILTRES} = useExplauraStore()
+    const {MAP_OVERLAY, setCUSTOM_LAYER, setCUSTOM_OVERLAY, CUSTOM_OVERLAY} = useMapStore()
+
     const [show, setShow] = useState(false)
-    const {AllMap, setMapLayer, AllLayer, setCustomLayer, customLayer, xplaura, filtre, setFiltre} = useContext(ExplauraContext);
+
     const Icons = {Drone: <Drone/>, Light : <Light/>}
     // Position for ScreenShot
     const ScreenShot = {Maps:{s:"a",g:"mt0",x:4163,y:2921,z:13}, Weather:{s:"a",g:"mt0",x:32,y:22,z:6}}
@@ -23,25 +25,25 @@ function Settings(props){
     // Set The New Map Layer for All Maps
     const UpdateLayer = (e) =>{
         const Select = e.target.id.split("-")[1];
-        setMapLayer({Url : AllMap[Select]._url, Options : AllMap[Select].options})
+        setCUSTOM_LAYER({Url : MAP_LAYER[Select]._url, Options : MAP_LAYER[Select].options})
     }
 
     // Generate Miniatures for Settings
-    const Thumb = Object.keys(AllMap).map((MapLayer)=>{
+    const Thumb = Object.keys(MAP_LAYER).map((MapLayer)=>{
         const Div = (
-        <div onClick={UpdateLayer} id={`Layer-${MapLayer}`} className='Settings-Thumb' key={MapLayer} style={{backgroundImage : `url("${ScreenShotRpl(AllMap[MapLayer]._url, "Maps")}")`}}></div>);
+        <div onClick={UpdateLayer} id={`Layer-${MapLayer}`} className='Settings-Thumb' key={MapLayer} style={{backgroundImage : `url("${ScreenShotRpl(MAP_LAYER[MapLayer]._url, "Maps")}")`}}></div>);
         return Div;
     })    
 
     // Update Mode (Drone, Light Polution...)
     const UpdateMode = (e) =>{
         const Select = e.currentTarget.id.split('-')[1];
-        (customLayer?.options.Name === AllLayer[Select]?.options.Name) ? setCustomLayer(null) : setCustomLayer(AllLayer[Select]);      
+        (CUSTOM_OVERLAY?.options.Name === MAP_OVERLAY[Select]?.options.Name) ? setCUSTOM_OVERLAY(null) : setCUSTOM_OVERLAY(MAP_OVERLAY[Select]);      
     }
 
     // Mode Buttons (Create Button and Click Event)
-    const Buttons = Object.keys(AllLayer).map((Layer)=>{
-        const Active = (customLayer?.options.Name === Layer) ? "Active" : ""
+    const Buttons = Object.keys(MAP_OVERLAY).map((Layer)=>{
+        const Active = (CUSTOM_OVERLAY?.options.Name === Layer) ? "Active" : ""
         return(
             <div id={`Layers-${Layer}`} onClick={UpdateMode} key={Layer} className={`Mode-Button ${Active}`}>
                 {Icons[Layer]}
@@ -52,14 +54,14 @@ function Settings(props){
     // Filtres Fonction
     const FiltersEnable = (e) =>{
         const Select = e.currentTarget.id.split('-')[1];
-        (filtre === Select) ? setFiltre(null) : setFiltre(Select)
+        (FILTRES === Select) ? setFILTRES(null) : setFILTRES(Select)
     }
 
     // Create unique Filters
     let UniqueType = {};
-    Object.keys(xplaura).map((item, index)=>{         
-        const Type = xplaura[item].Type;
-        const Active = (filtre === Type) ? "Active" : "";
+    Object.keys(SPOT).map((item, index)=>{         
+        const Type = SPOT[item].TYPE;
+        const Active = (FILTRES === Type) ? "Active" : "";
         const Image = `Markers/Types/${Type}.png`//require("../images/markers/type/"+Type+".png"); // Allow to use Require Image
         const Item = <div onClick={FiltersEnable} key={index} id={`Filter-${Type}`} className={`Settings-Filtre-Icon ${Active}`} style={{backgroundImage : `url("${Image}")`}}></div>
         !UniqueType[Type] && (UniqueType[Type]=Item);

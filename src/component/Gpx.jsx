@@ -1,16 +1,37 @@
 import React, {useEffect}  from 'react';
 import {useMap, useMapEvents, Marker} from 'react-leaflet';
 import * as L from "leaflet";
-import { useGpxStore, useMapStore } from '../store';
+import 'leaflet-gpx'; // Doit venir *après* leaflet
+import { useExplauraStore, useGpxStore, useMapStore } from '../store';
 
 function Gpx(props) {
-    const TheMap = useMap();
-    const {selectInfo, setGpxData, AllIcons, setSelectInfo, setSelectIndex} = props; 
+    const map = useMap();
 
-    const {MOVE, PREVIOUS_GPX, setPREVIOUS_GPX} = useGpxStore()
-    const {MOBILE} = useMapStore()
+    const {GPX, MOVE, PREVIOUS_GPX, setPREVIOUS_GPX, getGPXContent, setGPX_DATA, GPX_DATA, resetGPX} = useGpxStore()
+    const {SELECTED_INDEX, setSELECTED_INDEX, SELECTED_INFO, setSELECTED_INFO, getFilePreview} = useExplauraStore();
+    const {MOBILE, LIST_ICON} = useMapStore()
     // Function Parse Data
-    const ParseGpxData = (e, GpxDataBind) => {
+    const ParseGpxData = (e) => {
+       
+
+        let coordinates = [];
+  
+        // Vérifier que les layers existent
+        if (e.target.getLayers && e.target.getLayers().length > 0 && e.target.getLayers()[0]._layers) {
+          // Parcourir tous les layers pour trouver les coordonnées
+          const layers = e.target.getLayers()[0]._layers;
+          
+          // Itérer sur les layers
+          Object.values(layers).forEach(layer => {
+            // Si la couche a des coordonnées (comme une polyline)
+            if (layer.getLatLngs) {
+              const points = layer.getLatLngs();
+              coordinates = coordinates.concat(points);
+            }
+          });
+        }
+
+
     // Mobile GPX Temp
     let GpxData = {
         TotalTime : (e.target.get_duration_string_iso(e.target.get_moving_time())),
@@ -33,7 +54,7 @@ function Gpx(props) {
         Heart : e.target.get_average_hr(),
         Cadence : e.target.get_average_cadence(),
         CadenceData : e.target.get_cadence_data(),
-        LatLngSvg : e.target._LatLngSvg
+        LatLngSvg : coordinates
     }        
 
     // Elevation
@@ -60,7 +81,6 @@ function Gpx(props) {
 
     return {ElevationArray, ElevationLabel, GpxData}
     }
-
     // Update Path Animation on ZoomEnd
     useMapEvents({
         zoomend: (e) => {
@@ -71,9 +91,10 @@ function Gpx(props) {
             },500)
         },
         popupclose: (e) =>{ 
-            setSelectInfo(null)
-            setGpxData(null)
-            setSelectIndex()
+            setSELECTED_INFO(null)
+            setGPX_DATA(null)
+            setSELECTED_INDEX(null)
+            resetGPX(null)
         }
     });
 
@@ -81,35 +102,41 @@ function Gpx(props) {
     // Add Layer
 
     useEffect(()=>{ 
-        const Id = TheMap._leaflet_id; // Get ID of THIS map
-        const ThisLayer = PREVIOUS_GPX[Id]; // Get the PREVGPX based on ID THIS map
-        // console.log("Map Id :"+TheMap._leaflet_id);
-        (ThisLayer && TheMap.hasLayer(ThisLayer)) && ThisLayer.removeFrom(TheMap); // If Layer Exist REMOVE from the map
-        
-        const GpxNameFormat = selectInfo?.Infos.Gpx; // Check if SelectInfo Exist and if has GPX
-        const DrawGpx = (GpxNameFormat && !MobileDefined) && new L.GPX(`gpx/${GpxNameFormat}.gpx`, { 
+        SELECTED_INFO && getGPXContent(SELECTED_INFO?.$id); // Get the GPX
+        const Id = map._leaflet_id; // Get ID of THIS map
+        ( PREVIOUS_GPX[Id] && map.hasLayer( PREVIOUS_GPX[Id])) &&  PREVIOUS_GPX[Id].removeFrom(map); // If Layer Exist REMOVE from the map
+        const DrawGpx = (GPX) && new L.GPX(GPX, { 
             async: true,
-            polyline_options: { color: "#f4ff00" , weight: 3, opacity: 1.0, className:`PathDesktop PathDesktop-${Id}`},
-            marker_options: { startIconUrl: AllIcons.StartIcon.options.iconUrl, endIconUrl: AllIcons.EndIcon.options.iconUrl, shadowUrl: null, iconSize: [50,50] }
+            polyline_options: { 
+                color: "#f4ff00", 
+                weight: 3, 
+                opacity: 1.0, 
+                className:`PathDesktop PathDesktop-${Id}`
+            },
+            markers: { 
+                startIcon: LIST_ICON.START.options.iconUrl, 
+                endIcon: LIST_ICON.END.options.iconUrl, 
+            },
+            marker_options: { 
+                shadowUrl: null, 
+                iconSize: [50,50] 
+            }
         }).on('loaded', function(e) {
-            // console.log(mobile);
             (MOBILE === undefined || MOBILE) ? 
-            TheMap.fitBounds(e.target.getBounds(), {paddingTopLeft: [0, 0]}) : // Zoom to GPX  Mobile   
-            TheMap.fitBounds(e.target.getBounds(), {paddingTopLeft: [400, 0]}); // Zoom to GPX  Desktop    
-            setGpxData(ParseGpxData(e)) // Save GPX Data to State
-        }).addTo(TheMap);
-
-        (GpxNameFormat === "") && TheMap.setView(selectInfo?.Infos.Coord); // Zoom to map if no GPX 
-
-        //setPrevGpx(prevState => ({...prevState, [Id] : DrawGpx})); // Save Prev State       
+            map.fitBounds(e.target.getBounds(), {paddingTopLeft: [0, 0]}) : // Zoom to GPX  Mobile   
+            map.fitBounds(e.target.getBounds(), {paddingTopLeft: [400, 0]}); // Zoom to GPX  Desktop    
+            setGPX_DATA(ParseGpxData(e)) // Save GPX Data to State
+        }).addTo(map);
+        (SELECTED_INFO?.$id === "") && map.setView(SELECTED_INFO.COORD); // Zoom to map if no GPX 
+   
         setPREVIOUS_GPX(Id, DrawGpx)
-    }, [selectInfo]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [SELECTED_INFO, GPX])
 
-    const ToReturn = (selectInfo && !MobileDefined) && (
+    const ToReturn = (SELECTED_INFO) && (
         <>
-            <Marker draggable={true} icon={AllIcons.MoveIcon} position={MOVE} />
-            <Marker icon={AllIcons.ParkingIcon} position={selectInfo.Infos.Parking} />
-            <Marker icon={AllIcons.InterestIcon} position={selectInfo.Infos.Coord} />
+            <Marker draggable={true} icon={LIST_ICON.MOVE} position={MOVE} />
+            <Marker icon={LIST_ICON.PARKING} position={SELECTED_INFO.PARKING} />
+            <Marker icon={LIST_ICON.INTEREST} position={SELECTED_INFO.COORD} />
         </>
     )
 

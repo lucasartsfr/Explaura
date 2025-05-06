@@ -1,39 +1,31 @@
-import React, { useContext } from 'react';
-import { ExplauraContext } from '../App';
+import React from 'react';
+import { useExplauraStore, useMapStore } from '../store';
 
-function Card(props){
-    const {xplaura, user, filtre, setSelectIndex} = useContext(ExplauraContext);
-    // console.log(`Position User :${user.lat} ${user.lng}`)
+function Card(){
 
-    // Distance from user to Point
-    function distance(lat1, lon1, lat2, lon2) {
-        var p = 0.017453292519943295;    // Math.PI / 180
-        var c = Math.cos;
-        var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-                c(lat1 * p) * c(lat2 * p) * 
-                (1 - c((lon2 - lon1) * p))/2;      
-        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-    }
+    const {SPOT, FILTRES, setSELECTED_INDEX} = useExplauraStore()
+    const {USER_POSITION, DISTANCE_CALC} = useMapStore()
 
+ 
     // When Card is Clicked
     const ClickCard = (e) =>{
         const Id = parseInt(e.currentTarget.getAttribute('data-id'))
-        setSelectIndex(Id)
+        setSELECTED_INDEX(Id)
     }
 
     // Création des cartes
-    const CardItem = Object.keys(xplaura).map((item, index)=>{
-        const Coord = xplaura[item].Coord;
-        const Type = xplaura[item].Type;
-        const UserPos = (user.lat) ? Math.round(distance(user.lat,user.lng,Coord.lat, Coord.lng))+"km" : "?km";
+    const CardItem = Object.keys(SPOT).map((item, index)=>{
+        const Coord = SPOT[item].COORD;
+        const Type = SPOT[item].TYPE;
+        const UserPos = (USER_POSITION.lat) ? Math.round(DISTANCE_CALC(USER_POSITION.lat,USER_POSITION.lng,Coord[0], Coord[1]))+"km" : "?km";
         const Image = `images/img/${item}/1.jpg`;
         // Cartes       
-        const NewCard = (filtre === Type || filtre === null) && (
-            <div key={index} id={index} className={`CardBox`} data-id={index} data-lat={Coord.lat} data-lng={Coord.lng} onClick={ClickCard}>
+        const NewCard = (FILTRES === Type || FILTRES === null) && (
+            <div key={index} id={index} className={`CardBox`} data-id={index} data-lat={Coord[0]} data-lng={Coord[1]} onClick={ClickCard}>
                 <div className="Card" style={{backgroundImage : `url(${Image})`}}>
                 </div>
                 <div className="CardInfo">
-                    <h2>{item}</h2>
+                    <h2>{SPOT[item].NAME}</h2>
                     <h3 className={`${Type}`}>{Type}</h3>
                 </div>
                 <span className='DistanceCard'>{UserPos}</span>
