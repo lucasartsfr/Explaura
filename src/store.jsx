@@ -9,6 +9,7 @@ export const useExplauraStore = create((set, get) => ({
     error: null,    
 
     SPOT: {}, // List all Spots
+    WEATHER_SPOT : null,
     MEDIA : {},
     SELECTED_SPOT : null,
     WEATHER : null,
@@ -79,16 +80,20 @@ export const useExplauraStore = create((set, get) => ({
 
 export const useMapStore = create((set, get) => ({
     BOUNDS : [[46.785829, 0.796244],[44.049197, 6.198830]],
-    MOBILE : true,
+    MOBILE : false,
     setMOBILE: (state) => set({ MOBILE: state }),
     USER_POSITION : {},
     MAP_SETTINGS : {
         URL : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         MAXZOOM : 18,
-        MINZOOM : 7,
+        MINZOOM : 6,
         VISCOSITY : 0.8,
         CENTER : {lat:45.592104,lng:2.844146},
-        ZOOM : 10
+        ZOOM : 10,
+        SCREENSHOT : {
+            MAPS : {s:"a",g:"mt0",x:4163,y:2921,z:13},
+            WEATHER : {s:"a",g:"mt0",x:32,y:22,z:6}
+        }
     },
 
     MAP_OVERLAY : {
@@ -98,16 +103,16 @@ export const useMapStore = create((set, get) => ({
             tileSize: 256,
             zoomOffset: 0, //-1
             opacity: 0.5,
-            Name: "Drone", 
+            Name: "DRONE", 
             maxNativeZoom : 15
         }),
-        LIGHT : L.tileLayer.wms("https://darksitefinder.com/maps/tiles/tile_{z}_{x}_{y}.png", {
+        LIGHT : L.tileLayer.wms("https://darksitefinder.com/maps/tiles/2022/tile_{z}_{x}_{y}.png", {
             minZoom : 6,
             maxZoom: 18,   
             tileSize: 256,
             zoomOffset: 0, //-1
             opacity: 0.5, 
-            Name: "Light", 
+            Name: "LIGHT", 
             maxNativeZoom : 6
         }),
         
@@ -123,14 +128,14 @@ export const useMapStore = create((set, get) => ({
         GOOGLE : L.tileLayer("https://mt0.google.com/vt/lyrs=p&x={x}&y={y}&z={z}", {attribution: 'Xplaura Project', minZoom : 6, maxZoom: 18, maxNativeZoom : 20, format: 'jpg', time: '', noWrap : true, tilematrixset: 'GoogleMapsCompatible_Level', tileSize: 256, zoomOffset: 0, accessToken: 'pk.eyJ1Ijoic3dlZWZ0aCIsImEiOiJja3ptZ2IzN2g0M2hrMnVvMWttdWt6cnptIn0.ExNhsIX2PX-DXGjmQVVgsw', keepBuffer: 10}),
         TRAILS : L.tileLayer("https://topo.wanderreitkarte.de/topo/{z}/{x}/{y}.png", {attribution: 'Xplaura Project', minZoom : 6, maxZoom: 18, maxNativeZoom : 20, format: 'jpg', time: '', noWrap : true, tilematrixset: 'GoogleMapsCompatible_Level', tileSize: 256, zoomOffset: 0, accessToken: 'pk.eyJ1Ijoic3dlZWZ0aCIsImEiOiJja3ptZ2IzN2g0M2hrMnVvMWttdWt6cnptIn0.ExNhsIX2PX-DXGjmQVVgsw', keepBuffer: 10}),
     },
-    CUSTOM_LAYER : null,
+    CUSTOM_LAYER : L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: 'Xplaura Project', minZoom : 6, maxZoom: 18, maxNativeZoom : 16, format: 'jpg', time: '', noWrap : true, tilematrixset: 'GoogleMapsCompatible_Level', tileSize: 256, zoomOffset: 0, accessToken: 'pk.eyJ1Ijoic3dlZWZ0aCIsImEiOiJja3ptZ2IzN2g0M2hrMnVvMWttdWt6cnptIn0.ExNhsIX2PX-DXGjmQVVgsw', keepBuffer: 10}),
     setCUSTOM_LAYER: (layer) => set({ CUSTOM_LAYER: layer }),
 
     ICON_SETTINGS : {
         SIZE : [50, 50],
         ANCHOR : [50/2, 50],
         SHADOW : {
-            URL : "image/markers/marker-shadow.png",
+            URL : "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-shadow/view?project=6817b682003b9ec591eb&mode=admin",
             ANCHOR : [50/2, 50],
             SIZE : [50, 50],
         },
@@ -139,7 +144,7 @@ export const useMapStore = create((set, get) => ({
     ICON_DEFAULT : {
         iconSize: [50, 50],
         iconAnchor: [50/2, 50],    
-        shadowUrl : "image/markers/marker-shadow.png",
+        shadowUrl : "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-shadow/view?project=6817b682003b9ec591eb&mode=admin",
         shadowAnchor: [50/2, 50], 
         shadowSize:   [50, 50],
         popupAnchor: [0, -50],
@@ -147,11 +152,11 @@ export const useMapStore = create((set, get) => ({
     initListIcons: () => {
         set({
             LIST_ICON: {
-                PARKING: L.icon({...get().ICON_DEFAULT, iconUrl: "image/markers/marker-parking.png"}),
-                INTEREST: L.icon({...get().ICON_DEFAULT, iconUrl: "image/markers/marker-interest.png"}),
-                START: L.icon({...get().ICON_DEFAULT, iconUrl: "image/markers/marker-start.png"}),
-                END: L.icon({...get().ICON_DEFAULT, iconUrl: "image/markers/marker-stop.png"}),
-                MOVE: L.icon({...get().ICON_DEFAULT, className: "MoveIcon", shadowUrl: null, iconUrl: "image/markers/marker-move.png"})
+                PARKING: L.icon({...get().ICON_DEFAULT, iconUrl: "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-parking/view?project=6817b682003b9ec591eb&mode=admin"}),
+                INTEREST: L.icon({...get().ICON_DEFAULT, iconUrl: "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-interest/view?project=6817b682003b9ec591eb&mode=admin"}),
+                START: L.icon({...get().ICON_DEFAULT, iconUrl: "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-start/view?project=6817b682003b9ec591eb&mode=admin"}),
+                END: L.icon({...get().ICON_DEFAULT, iconUrl: "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-stop/view?project=6817b682003b9ec591eb&mode=admin"}),
+                MOVE: L.icon({...get().ICON_DEFAULT, className: "MoveIcon", shadowUrl: null, iconUrl: "https://fra.cloud.appwrite.io/v1/storage/buckets/6817b7e90005e3cde7b1/files/marker-move/view?project=6817b682003b9ec591eb&mode=admin"})
             }
         });
     },
@@ -194,4 +199,70 @@ export const useGpxStore = create((set) => ({
     
     GPX_DATA : null,
     setGPX_DATA: (data) => set({ GPX_DATA: data }),
+    PARSE_GPX_DATA: (e) => {
+        
+        let coordinates = [];  
+        // Vérifier que les layers existent
+        if (e.target.getLayers && e.target.getLayers().length > 0 && e.target.getLayers()[0]._layers) {
+          // Parcourir tous les layers pour trouver les coordonnées
+          const layers = e.target.getLayers()[0]._layers;          
+          // Itérer sur les layers
+          Object.values(layers).forEach(layer => {
+            // Si la couche a des coordonnées (comme une polyline)
+            if (layer.getLatLngs) {
+              const points = layer.getLatLngs();
+              coordinates = coordinates.concat(points);
+            }
+          });
+        }
+
+        // Mobile GPX Temp
+        let GpxData = {
+            TotalTime : (e.target.get_duration_string_iso(e.target.get_moving_time())),
+            MinElevation : e.target.get_elevation_min(),
+            MaxElevation : e.target.get_elevation_max(),
+            Denivele : (e.target.get_elevation_max() - e.target.get_elevation_min()),
+            GainElevation : (e.target.get_elevation_gain()).toFixed(0),
+            LossElevation : e.target.get_elevation_loss(),
+            ElevationData : e.target.get_elevation_data(),
+            Distance : ((e.target.get_distance()/1000).toFixed(2)),
+            SpeedAverage : (e.target.get_total_speed().toFixed(2)),
+            SpeedData : e.target.get_speed_data(),
+            SpeedMax : e.target.get_speed_max(),
+            MovingSpeed : e.target.get_moving_speed(),
+            MovingTime : (e.target.get_moving_time()/1),
+            MovingPace : (e.target.get_duration_string_iso(e.target.get_moving_pace())),
+            Start : e.target.get_start_time(),
+            End : e.target.get_end_time(),
+            MinutePerKm : (e.target.get_duration_string_iso( (e.target.get_moving_time() / (e.target.get_distance()/1000).toFixed()) ).split(".")[0]),
+            Heart : e.target.get_average_hr(),
+            Cadence : e.target.get_average_cadence(),
+            CadenceData : e.target.get_cadence_data(),
+            LatLngSvg : coordinates
+        }        
+
+        // Elevation
+        let ElevationArray = [];
+        let ElevationLabel = [];
+        for(let i = 0; i < GpxData.ElevationData.length; i++){
+                ElevationArray.push(GpxData.ElevationData[i][1].toFixed(2)); 
+                ElevationLabel.push(GpxData.ElevationData[i][0].toFixed(2)+" km"); 
+        }
+
+        // Vitesse moyenne corrigée en mouvement (Supprime les petits mouvements)
+        let UpdSpd = 0;
+        let CountUpdSpd = 0;
+        let Precision = 1;
+        let MinSpeed = 3;
+        for(let i = 0; i < GpxData.SpeedData.length; i++){
+            if(i > 0 && GpxData.SpeedData[i][1] < MinSpeed && (GpxData.SpeedData[i][0].toFixed(Precision)) === (GpxData.SpeedData[(i-1)][0].toFixed(Precision))){}        
+            else{
+                UpdSpd = UpdSpd + parseFloat(GpxData.SpeedData[i][1])
+                CountUpdSpd++;
+            }
+        }
+        GpxData.MovingSpeedUpdated = parseFloat((UpdSpd/CountUpdSpd).toFixed(2)) 
+
+        return {ElevationArray, ElevationLabel, GpxData}
+    }
 }))

@@ -5,32 +5,19 @@ import { useExplauraStore, useMapStore } from '../store';
 
 function Markers() {
 
-  const {FILTRES, SPOT, setSELECTED_INDEX, SELECTED_INDEX,setSELECTED_INFO} = useExplauraStore();
-  const {ICON_SETTINGS, MOBILE} = useMapStore()
+  const {FILTRES, SPOT, setSELECTED_INDEX, SELECTED_INDEX,setSELECTED_INFO, getFilePreview} = useExplauraStore();
+  const {ICON_SETTINGS, MOBILE, LIST_ICON, ICON_DEFAULT} = useMapStore()
 
   const markerRef = useRef([]); // Create A Ref for Marker
   const map = useMap();
   
-  // Icon Settings (Default Parameters)
-  const IconSettings = {
-    iconSize: ICON_SETTINGS.SIZE,
-    iconAnchor: ICON_SETTINGS.ANCHOR,    
-    shadowUrl : ICON_SETTINGS.SHADOW.URL,
-    shadowAnchor: ICON_SETTINGS.SHADOW.ANCHOR,
-    shadowSize:   ICON_SETTINGS.SHADOW.SIZE,
-    popupAnchor: ICON_SETTINGS.POPUP_ANCHOR
-  }
 
-  // Icon on Focus
-  const MarkerIconFocus = L.icon({...IconSettings, className: "Focus-Marker", iconUrl: `Markers/interest.png`});
-
-  
   // Update Focus Marker on Select Change
   useEffect(() => {  
     // Fix Null == 0
     if(SELECTED_INDEX || SELECTED_INDEX === 0){
         const ThisMarker = markerRef.current[SELECTED_INDEX];     
-        ThisMarker?.openPopup().setIcon(MarkerIconFocus); // If markerRef Exist, set Focus Icon 
+        ThisMarker?.openPopup().setIcon(LIST_ICON?.INTEREST); // If markerRef Exist, set Focus Icon 
         // If mobile is false, FitBound for desktop
         (!MOBILE) ? 
         map.fitBounds([ThisMarker?.getLatLng(), ThisMarker?.getLatLng()], {maxZoom : 14, paddingTopLeft: [400, 0], animate: true, duration: 0.5 }) : 
@@ -56,7 +43,7 @@ function Markers() {
   const MarkerPosition = Object.keys(SPOT).map((item, index)=>{
     const Coord = SPOT[item].COORD;
     const Type = SPOT[item].TYPE;
-    const DynamicIcon = L.icon({...IconSettings, iconUrl: `Markers/Types/${Type}.png`});
+    const DynamicIcon = L.icon({...ICON_DEFAULT, iconUrl: getFilePreview('marker-'+Type)});
     const ToReturn = (FILTRES === Type || FILTRES === null) && 
     <Marker 
       position={Coord} // posioptn="lat:x,lng:y"

@@ -13,6 +13,7 @@ function App() {
 
   const {fetchSPOTs, fetchFiles, SELECTED_INFO } = useExplauraStore();
   const {setMOBILE, MOBILE} = useMapStore();
+
   useEffect(() => {
     
     // Load Leaflet GPX
@@ -21,7 +22,6 @@ function App() {
     document.body.appendChild(script);    
 
     fetchSPOTs();
-    fetchFiles();
 
     // Detect Mobile
     function isMobile(){ (window.innerWidth < 800) ? setMOBILE(true) : setMOBILE(false); }; 
@@ -32,23 +32,14 @@ function App() {
 }, [fetchSPOTs]);
 
 
-  // All States
-
-
   // Show or Hide
   const Show = (SELECTED_INFO) ? "ShowInfo" : "HideInfo";
-
-
-
-
-
-  // Check if user is on Mobile
   const isMobile = (MOBILE) ? "isMobile" : "NotMobile";
 
   return (
     <div className={`App Horizontal ${isMobile}`}>
       <div id='MapContainer'>
-        {/* <Settings  /> */}
+        <Settings  />
         <Map />
         <Card />      
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { MapContainer, TileLayer} from 'react-leaflet';
 
@@ -15,11 +15,12 @@ import Gpx from './Gpx';
 import Weather from './Weather';
 import Like from './Like';
 import { useExplauraStore, useGpxStore, useMapStore } from '../store';
+import Meteo from './Meteo';
 
 function Info(){
 
     const {SELECTED_INFO, SELECTED_INFO_DEFAULT, RATE_EMOJI, getFilePreview} = useExplauraStore()
-    const {MAP_SETTINGS, CUSTOM_LAYER} = useMapStore()
+    const {MAP_SETTINGS, CUSTOM_LAYER, MOBILE} = useMapStore()
     const {GPX_DATA, setMOVE} = useGpxStore();
 
     const [emblaRef] = useEmblaCarousel();
@@ -59,10 +60,10 @@ function Info(){
     const EmblaSlideshow = (SELECTED_INFO) ? SELECTED_INFO.PHOTOS.map((IdImage, index)=>{
         return(
             <div key={index} className='Slideshow-img embla__slide'>
-                <img alt={SELECTED_INFO.NAME} src={`images/${SELECTED_INFO.NAME}/${IdImage}`} />
+                <img alt={SELECTED_INFO.NAME} src={IdImage} />
             </div>
         )
-    }) : <div className='Slideshow-img embla__slide' style={{backgroundImage : `url(${`Images/Explaura/1.jpg`})`}}> </div>;
+    }) : <div className='Slideshow-img embla__slide' style={{backgroundImage : `url(https://cdn.lucasarts.fr/img/80.jpg)`}}> </div>;
 
 
     // Avis / Note
@@ -105,16 +106,19 @@ function Info(){
         <div className="Info-scroller">
             <Like />
             <Weather />
+            {
+                SELECTED_INFO && <Meteo />
+            }
             <div className='Slideshow-container' key={SELECTED_INFO?.$id} ref={emblaRef}>
                     <div className={`Slideshow-element embla__container`}>
                         {EmblaSlideshow}
                     </div>
-               <img alt="Smoke" className='Slideshow-smoke' src={`image/theme/smoke.png`}></img>
+               <img alt="Smoke" className='Slideshow-smoke' src={getFilePreview("assets-smoke")}></img>
             </div>
             <div className='Info-container'>
                 <div className='Info-Header'>                
                     <div className='Info-type'>
-                        <img alt={SELECTED_INFO?.TYPE} src={getFilePreview("type-"+SELECTED_INFO?.TYPE)}></img>
+                        <img alt={SELECTED_INFO?.TYPE} src={getFilePreview(SELECTED_INFO ? "type-"+SELECTED_INFO?.TYPE : "type-user")}></img>
                     </div>
 
                     <div className='Info-data'>
@@ -127,15 +131,23 @@ function Info(){
                 </div>
                  {/* Map */}
                 <div className='Info-map' id='Info-map'>
-                    <MapContainer center={{lat:45.592104,lng:2.844146}} zoom={13} scrollWheelZoom={true}>
+                    {
+                        MOBILE && 
+                        <MapContainer center={{lat:45.592104,lng:2.844146}} zoom={13} scrollWheelZoom={true}>
                         <TileLayer maxNativeZoom={MAP_SETTINGS.MAXZOOM} key={MAP_SETTINGS.URL} url={MAP_SETTINGS.URL}/>
                         { 
                             CUSTOM_LAYER && 
-                            <TileLayer zIndex={100} opacity={0.5} key={CUSTOM_LAYER._url} url={CUSTOM_LAYER._url} maxNativeZoom={CUSTOM_LAYER.options.maxNativeZoom}/>
-                        }      
-                            <Gpx 
-                            />                                        
+                            <TileLayer 
+                                zIndex={100}
+                                opacity={0.5} 
+                                key={CUSTOM_LAYER._url+1} 
+                                url={CUSTOM_LAYER._url} 
+                                maxNativeZoom={MAP_SETTINGS.MAXZOOM}
+                            />
+                        }
+                        <Gpx />                                        
                     </MapContainer>
+                    }                   
 
                 </div>
                  {/* Data GPX */}
@@ -164,7 +176,7 @@ function Info(){
                 {SELECTED_INFO && <div className='Info-note'>
                     <div className='Info-Review'>
                         <div className='Info-Review-User'>
-                            <img alt="User" src={`image/theme/type/user.png`}/> 
+                            <img alt="User" src={getFilePreview('type-user')}/> 
                         </div>
                         <div className='Info-Review-Text'>
                             {SELECTED_INFO?.REVIEW}

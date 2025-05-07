@@ -8,37 +8,32 @@ import { useExplauraStore, useMapStore } from '../store';
 
 function Settings(props){
 
-    const {SPOT, FILTRES, setFILTRES} = useExplauraStore()
-    const {MAP_OVERLAY, setCUSTOM_LAYER, setCUSTOM_OVERLAY, CUSTOM_OVERLAY} = useMapStore()
+    const {SPOT, FILTRES, setFILTRES, getFilePreview} = useExplauraStore()
+    const {MAP_OVERLAY,MAP_SETTINGS, setCUSTOM_LAYER, setCUSTOM_OVERLAY, CUSTOM_OVERLAY, MAP_LAYER } = useMapStore()
 
     const [show, setShow] = useState(false)
-
-    const Icons = {Drone: <Drone/>, Light : <Light/>}
-    // Position for ScreenShot
-    const ScreenShot = {Maps:{s:"a",g:"mt0",x:4163,y:2921,z:13}, Weather:{s:"a",g:"mt0",x:32,y:22,z:6}}
+    const Icons = {DRONE: <Drone/>, LIGHT : <Light/>}
 
     // Function to Generate ScreenShot
     function ScreenShotRpl(S, L){
-        return S.replace('{g}', ScreenShot[L].g).replace('{s}',ScreenShot[L].s).replace('{x}', ScreenShot[L].x).replace('{y}', ScreenShot[L].y).replace('{z}', ScreenShot[L].z)
+        return S.replace('{g}', MAP_SETTINGS.SCREENSHOT[L].g).replace('{s}',MAP_SETTINGS.SCREENSHOT[L].s).replace('{x}', MAP_SETTINGS.SCREENSHOT[L].x).replace('{y}', MAP_SETTINGS.SCREENSHOT[L].y).replace('{z}', MAP_SETTINGS.SCREENSHOT[L].z)
     }
 
     // Set The New Map Layer for All Maps
     const UpdateLayer = (e) =>{
         const Select = e.target.id.split("-")[1];
-        setCUSTOM_LAYER({Url : MAP_LAYER[Select]._url, Options : MAP_LAYER[Select].options})
+        setCUSTOM_LAYER(MAP_LAYER[Select])
     }
 
     // Generate Miniatures for Settings
     const Thumb = Object.keys(MAP_LAYER).map((MapLayer)=>{
-        const Div = (
-        <div onClick={UpdateLayer} id={`Layer-${MapLayer}`} className='Settings-Thumb' key={MapLayer} style={{backgroundImage : `url("${ScreenShotRpl(MAP_LAYER[MapLayer]._url, "Maps")}")`}}></div>);
-        return Div;
+        return (<div onClick={UpdateLayer} id={`Layer-${MapLayer}`} className='Settings-Thumb' key={MapLayer} style={{backgroundImage : `url("${ScreenShotRpl(MAP_LAYER[MapLayer]._url, "MAPS")}")`}}></div>);
     })    
 
     // Update Mode (Drone, Light Polution...)
     const UpdateMode = (e) =>{
         const Select = e.currentTarget.id.split('-')[1];
-        (CUSTOM_OVERLAY?.options.Name === MAP_OVERLAY[Select]?.options.Name) ? setCUSTOM_OVERLAY(null) : setCUSTOM_OVERLAY(MAP_OVERLAY[Select]);      
+        (CUSTOM_OVERLAY?.options?.Name === MAP_OVERLAY[Select]?.options.Name) ? setCUSTOM_OVERLAY(null) : setCUSTOM_OVERLAY(MAP_OVERLAY[Select]);                 
     }
 
     // Mode Buttons (Create Button and Click Event)
@@ -62,7 +57,7 @@ function Settings(props){
     Object.keys(SPOT).map((item, index)=>{         
         const Type = SPOT[item].TYPE;
         const Active = (FILTRES === Type) ? "Active" : "";
-        const Image = `Markers/Types/${Type}.png`//require("../images/markers/type/"+Type+".png"); // Allow to use Require Image
+        const Image = getFilePreview('marker-'+Type);
         const Item = <div onClick={FiltersEnable} key={index} id={`Filter-${Type}`} className={`Settings-Filtre-Icon ${Active}`} style={{backgroundImage : `url("${Image}")`}}></div>
         !UniqueType[Type] && (UniqueType[Type]=Item);
         return Item;

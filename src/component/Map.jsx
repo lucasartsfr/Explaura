@@ -8,7 +8,7 @@ import { useMapStore } from '../store';
 
 function Map() {
   // use Context Provider 
-  const {BOUNDS, MOBILE, MAP_SETTINGS, CUSTOM_LAYER} = useMapStore()
+  const {BOUNDS, MOBILE, MAP_SETTINGS, CUSTOM_LAYER, CUSTOM_OVERLAY} = useMapStore()
 
   return (
         <MapContainer 
@@ -25,17 +25,25 @@ function Map() {
           
           <TileLayer 
             maxNativeZoom={MAP_SETTINGS.MAXZOOM} 
-            key={MAP_SETTINGS.URL} 
-            url={MAP_SETTINGS.URL}
+            key={CUSTOM_LAYER?._url} 
+            url={CUSTOM_LAYER?._url}
           />
           {
-            CUSTOM_LAYER && 
-            <TileLayer opacity={0.5} zIndex={100} key={CUSTOM_LAYER._url} url={CUSTOM_LAYER._url} maxNativeZoom={CUSTOM_LAYER.options.maxNativeZoom}/>
+            CUSTOM_OVERLAY && 
+            <TileLayer 
+              opacity={0.5} 
+              zIndex={100} 
+              key={CUSTOM_OVERLAY?._url} 
+              url={CUSTOM_OVERLAY?._url} 
+              maxNativeZoom={CUSTOM_OVERLAY?.options?.maxNativeZoom}
+            />
           }      
           <Markers/>
                   
-            <Gpx />
-            {/* <Position /> */}
+            {
+              !MOBILE && <Gpx />
+            }
+            <Position />
           
         </MapContainer>
   );

@@ -11,7 +11,7 @@ function Position(){
         map.locate().on('locationfound', function (e) { 
             useMapStore.setState({ USER_POSITION: {lat : e.latitude, lng : e.longitude} });
         })          
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []) 
     return null
 }
 

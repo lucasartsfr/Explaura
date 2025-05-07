@@ -18,7 +18,7 @@ function Card(){
         const Coord = SPOT[item].COORD;
         const Type = SPOT[item].TYPE;
         const UserPos = (USER_POSITION.lat) ? Math.round(DISTANCE_CALC(USER_POSITION.lat,USER_POSITION.lng,Coord[0], Coord[1]))+"km" : "?km";
-        const Image = `images/img/${item}/1.jpg`;
+        const Image = SPOT[item].PHOTOS[0];
         // Cartes       
         const NewCard = (FILTRES === Type || FILTRES === null) && (
             <div key={index} id={index} className={`CardBox`} data-id={index} data-lat={Coord[0]} data-lng={Coord[1]} onClick={ClickCard}>
