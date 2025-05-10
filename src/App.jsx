@@ -5,6 +5,7 @@ import Card from './component/Card.jsx'
 import Info from './component/Info.jsx';
 import Settings from './component/Settings.jsx';
 import {useExplauraStore, useMapStore} from './store.jsx';
+import Info2 from './component/Info/Info2.jsx';
 
 export const ExplauraContext = createContext(null);
 
@@ -44,7 +45,7 @@ function App() {
         <Card />      
       </div>
       <div id='InfoContainer' className={Show}>
-        <Info />
+        <Info2 />
       </div>      
     </div>
   );
