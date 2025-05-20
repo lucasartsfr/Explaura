@@ -1,13 +1,11 @@
 import './App.css';
 import React, {useEffect, createContext}  from 'react';
 import Map from './component/Map.jsx'
-import Card from './component/Card.jsx'
+import Card from './component/Card/Card.jsx'
 import Info from './component/Info.jsx';
 import Settings from './component/Settings.jsx';
 import {useExplauraStore, useMapStore} from './store.jsx';
 import Info2 from './component/Info/Info2.jsx';
-
-export const ExplauraContext = createContext(null);
 
 
 function App() {

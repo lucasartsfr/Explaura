@@ -1,0 +1,81 @@
+
+/* CARDS */
+
+.CardContainer {
+  position: absolute;
+  right: 0%;
+  bottom: 0;
+  width: 98%;
+  height: 200px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  transform: translate(-1%,0);
+}
+
+.Card{
+  
+  background-size: cover;
+  background-position: center;
+  min-width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 4px 4px 5px rgb(0 0 0 / 27%);
+  margin-right: 20px;
+}
+
+.CardBox {
+  position: relative;
+  background: white;
+  scroll-snap-align: center;
+  margin: 10px;
+  display: flex;
+  min-width: 300px;
+  max-width: 340px;
+  width: 100%;
+  border-radius: 14px;
+  padding: 10px;  
+  cursor: pointer;
+  transition: .4s;
+  opacity: .8;
+  box-shadow: 2px 4px 9px rgb(0 0 0 / 8%);
+}
+
+.DistanceCard {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  font-size: .875em;
+  font-weight: 700;
+}
+
+.CardInfo h2{
+  font-size: 12pt;
+  margin: 0;
+  margin-bottom: 10px;
+  line-height: 18px;
+}
+
+.CardInfo h3{
+  font-size: 9pt;
+  margin: 0;
+  font-weight: 400;
+  color: white;
+  display: initial;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+.CardInfo .volcan{background-color: var(--volcan)!important;}
+.CardInfo .cascade{background-color: var(--cascade)!important;}
+.CardInfo .lac{background-color: var(--lac)!important;}
+.CardInfo .montagne{background-color: var(--montagne)!important;}
+
+.selected{
+  opacity: 1;
+  box-shadow: 2px 4px 9px rgb(0 0 0 / 18%);
+}

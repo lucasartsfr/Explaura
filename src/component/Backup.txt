@@ -1,0 +1,31 @@
+
+  // Function to create custom marker icon with image and SVG
+  const createCustomIconSvg = (Type) => {
+    const imageUrl = getFilePreview('marker-' + Type);
+    const svgIcon = `
+      <svg class="Marker-v2-svg" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+        <defs>
+          <filter id="drop-shadow-1" x="7.36" y="2.4" width="85.44" height="96.96" filterUnits="userSpaceOnUse">
+            <feOffset dx="0" dy=".8"/>
+            <feGaussianBlur result="blur" stdDeviation=".64"/>
+            <feFlood flood-color="#000" flood-opacity=".12"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+          </filter>
+        </defs>
+        <path d="M77.64,14.37C62.16.01,37.84.01,22.36,14.37c-17.03,15.79-17.41,42.4-1.14,58.67.83.83,1.7,1.62,2.59,2.36l20.83,19.01c3.04,2.78,7.7,2.78,10.74,0l20.83-19.01c.89-.75,1.75-1.53,2.59-2.36,16.27-16.27,15.89-42.89-1.14-58.67Z" fill="var(--marker-color)" filter="url(#drop-shadow-1)"/>
+      </svg>
+    `;
+
+    return L.divIcon({
+      html: `
+        <div class="Marker-v2-wrapper">
+          <img class="Marker-v2-img" src="${imageUrl}" alt="Marker Image">
+          ${svgIcon}
+        </div>
+      `,
+      className: 'Marker-v2',
+      iconSize: ICON_DEFAULT.iconSize,
+      iconAnchor: ICON_DEFAULT.iconAnchor
+    });
+  };

@@ -1,14 +1,16 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import Gpx from './Gpx';
-import Markers from './Markers';
+
 import Position from './Position';
 import React, { useContext } from 'react';
 import * as L from "leaflet";
 import { useMapStore } from '../store';
+import Markers from './Markers/Markers';
 
 function Map() {
   // use Context Provider 
   const {BOUNDS, MOBILE, MAP_SETTINGS, CUSTOM_LAYER, CUSTOM_OVERLAY} = useMapStore()
+
 
   return (
         <MapContainer 

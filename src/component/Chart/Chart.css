@@ -1,0 +1,24 @@
+.Chart{
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+}
+
+.Chart-Bar{    
+    width: 4px;
+    height: 12px;
+    border-radius: 8px;
+    margin-right: 4px;
+}
+
+.Tooltip-Wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.Bar-km{
+    background-color: var(--chart);
+}
+
+.Bar-Alt{
+    background-color: var(--chart);
+}

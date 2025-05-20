@@ -1,31 +1,237 @@
+#InfoContainer {  
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 1.5%;
+    top: 50%;
+    z-index: 999;
+    max-width: 400px;
+    max-height: 95%;
+    transform: translateY(-50%);
+    border-radius: 10px;  
+    background-color: white;  
+    overflow: scroll;
+  }
+  
+  .NotMobile .Info-map, .NotMobile .CardContainer{
+    display: none;
+  }
+  
+  .Info-scroller{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
 .Info-Background{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
+.Info-Headers{
+
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-bottom: 100%;
+    margin-top: 40px;
+
+    .Info-Temp{
+        font-size: 3rem;
+        font-weight: 800;
+        font-family: "Space Grotesk", sans-serif;
+        line-height:normal
+    }
+
+    
+    .Info_Coord{
+        font-family: "Share Tech", sans-serif;
+        font-weight: 200;
+        font-size: .875rem;
+        line-height: normal;
+    }
+}
+
+
+.Info-blur{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
 
 .Info-Scroll{
     background: linear-gradient(0deg,rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0) 100%);
     width: 100%;
-    height: 100%;
-    backdrop-filter: blur(0px);
-    margin-top: 100%;
-    padding: 20px;
+    /* height: 100%; */
+    /* margin-top: 100%; */
+    padding: 40px;
+    position: relative;
+    z-index: 2;
 }
 
-.Info-Name{
-    color: white;
-    font-weight: bold;
-    margin: 0;
+.Info-Body{
+
+    margin-bottom: 20px;
+
+    .Info-Name{
+        color: white;
+        font-weight: bold;
+        margin: 0;
+        font-size: 3rem;
+    }
+
+    .Info-Rate{
+        color: var(--rate);
+        margin: 0;
+
+        .Rate-Star{
+            font-size: 1.2rem;
+            margin: 0 4px;
+        }
+    }
 }
 
-.Info-Rate{
-    color: var(--rate);
-    margin: 0;
+
+.Info-Footer{
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .Info-Info{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        color: white;
+    
+        h3{
+            margin: 0;
+            font-weight: 700;
+        }
+    
+        span{
+            font-weight: 100;
+        }
+    }
+
+    .Info-Description{
+        color: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    
+    .Info-Gpx {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%; /* Assurez-vous que le conteneur prend toute la largeur disponible */
+        gap: 20px; /* Espace entre les éléments */
+
+        
+        .data-gpx{
+            flex: 1;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 15px;
+            border-radius: 16px;
+            background-color: var(--card-bg);
+            /* box-shadow: rgb(149 157 165 / 10%) 0px 5px 11px; */
+        }
+        
+        .data-gpx .name{
+            color: var(--SecondText);
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .data-gpx h4{
+            margin: 0;
+            color: var(--text);
+        }
+        
+        .data-gpx .Icons{
+            font-size: 1.3em;
+            font-weight: 900;
+        }
+        .data-gpx:nth-child(1) .Icons{
+            color: #e74c3c;
+            --fa-animation-duration: 1s;
+        }
+        .data-gpx:nth-child(2) .Icons{
+            color: #27ae60;
+            --fa-animation-duration: 3s;
+        }
+        .data-gpx:nth-child(3) .Icons{
+            color: #ffaf40;
+            --fa-animation-duration: 4s;
+        }
+        .data-gpx:nth-child(4) .Icons{
+            color: #17c0eb;
+            --fa-animation-duration: 2s;
+        }
+        .data-gpx:nth-child(5) .Icons{
+            color: #ffffff;
+            --fa-animation-duration: 2s;
+        }
+        .data-gpx:nth-child(6) .Icons{
+            color: #f1c40f;
+            --fa-animation-duration: 2s;
+        }
+  
+    }
+  
+    .Info-map{
+        width: 100%;
+        height: 250px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .Info-DepartLink{
+        background-color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        width: fit-content;
+        margin: auto;
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: var(--card-bg);
+        font-weight: 600;
+    }
+
 }
+
 
 .Rate-off{
     color: var(--rate-off);
     margin: 0;
 }
+
+
+
+@media (max-width: 800px) {
+      #InfoContainer {
+        position: relative;
+        overflow: hidden;
+        left: 0%;
+        top: 0%;
+        max-width: 100%;
+        max-height: 100%;
+        transform: translateY(0%);
+        border-radius: 0px;
+      }
+      
+  }

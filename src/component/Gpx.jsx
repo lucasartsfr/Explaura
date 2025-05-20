@@ -64,7 +64,7 @@ function Gpx(props) {
         
     }, [SELECTED_INFO, GPX])
 
-    const ToReturn = (SELECTED_INFO) && (
+    const ToReturn = (SELECTED_INFO && GPX) && (
         <>
             <Marker draggable={false} icon={LIST_ICON.MOVE} position={MOVE} />
             <Marker icon={LIST_ICON.PARKING} position={SELECTED_INFO.PARKING} />
